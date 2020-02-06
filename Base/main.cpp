@@ -50,7 +50,7 @@ int main(int argc, const char * argv[]) {
             }while(band2);
             do{
                 band2=false;
-                cout<<"base de salida (2 a 30)"<<endl;
+                cout<<"base de salida (2 a 30) : ";
                 getline(cin,myStr);
                 try{
                     convertion.setExitBase(myStr);
@@ -60,7 +60,8 @@ int main(int argc, const char * argv[]) {
                     cerr<<err.what()<<endl;
                 }
             }while(band2);
-            convertion.process();
+            cout<<convertion.process()<<endl;
+            cin.get();
         }
         else if(myStr=="2"){
             band=true;

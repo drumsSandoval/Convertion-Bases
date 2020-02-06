@@ -8,11 +8,8 @@
 
 #include "convertion.hpp"
 #include <cmath>
-
 using namespace std;
-Convertion::Convertion(){
-    
-}
+Convertion::Convertion(){}
 void Convertion::setInitialBase(string myStr){
     this->entryBase =  stoi(myStr);
     if(this->entryBase > 30 || this->entryBase < 2)
@@ -50,8 +47,20 @@ void Convertion::setExitBase(string myStr){
         throw invalid_argument("Bases no validas");
 }
 string Convertion::process(){
-    this->toBase10();
-    return "";
+    int decimal = this->toBase10();
+    string result="";
+    int residuo = decimal % exitBase;
+    decimal = decimal/exitBase;
+    result+=getValue(residuo);
+    while(decimal > exitBase){
+        residuo = decimal % exitBase;
+        decimal = decimal/exitBase;
+        result+=getValue(residuo);
+    }
+    if(getValue(decimal) != "0")
+        result+=getValue(decimal);
+    reverse(result.begin(), result.end());
+    return "El numero: " + number + " escrito en base: " + to_string(entryBase) + " es igual a: " + result + " en base: " + to_string(exitBase) + "\n";;
 }
 int Convertion::toBase10(){
     reverse(number.begin(), number.end());
@@ -62,9 +71,7 @@ int Convertion::toBase10(){
         cont = getValue(aux);
         base_10+=cont*pow(entryBase,i);
     }
-    cout<<base_10<<endl;
-    cin.get();
-    return 1;
+    return base_10;
 }
 int Convertion::getValue(string n){
     const unsigned asci_min = 97,asci_may = 65;
@@ -78,4 +85,15 @@ int Convertion::getValue(string n){
         return aux;
     }
     return stoi(n);
+}
+
+string Convertion::getValue(int n){
+    if(n<10){
+        return to_string(n);
+    }
+    const int aux = n + 55;
+    char a = char(aux);
+    string mystr="";
+    mystr+=a;
+    return mystr;
 }

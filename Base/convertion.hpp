@@ -23,6 +23,7 @@ public:
     void setNumber(std::string);
     void setExitBase(std::string);
     std::string process();
+    std::string getValue(int);
 };
 
 #endif /* convertion_h */
