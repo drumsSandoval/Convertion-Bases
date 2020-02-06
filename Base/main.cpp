@@ -38,8 +38,10 @@ int main(int argc, const char * argv[]) {
             }while(band2);
             do{
                 band2=false;
-                cout<<"Caracteres :  : ";
+                cout<<"number :  : ";
                 getline(cin,myStr);
+                for(int i = 0;myStr[i];++i)
+                       myStr[i] = toupper(myStr[i]);
                 try{
                     convertion.setNumber(myStr);
                 }catch(invalid_argument& err){

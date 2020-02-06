@@ -17,7 +17,6 @@ void Convertion::setInitialBase(string myStr){
 }
 void Convertion::setNumber(string myStr){
     const int aux = (this->entryBase - 10);
-    const int asci_min = 97;
     const int asci_may = 65;
     string mystr;
     bool band;
@@ -35,9 +34,9 @@ void Convertion::setNumber(string myStr){
             if(band)
                 throw invalid_argument(ex.what());
         }
-       if(int(myStr[i])<65 || int(myStr[i]) >= asci_may + aux || int(myStr[i]) >= asci_min+aux){
+       if(int(myStr[i])<65 || int(myStr[i]) >= asci_may + aux)
              throw invalid_argument("Expresion no valida\n");
-        }
+        
     }
     this->number = myStr;
 }
@@ -63,11 +62,12 @@ string Convertion::process(){
     return "El numero: " + number + " escrito en base: " + to_string(entryBase) + " es igual a: " + result + " en base: " + to_string(exitBase) + "\n";;
 }
 int Convertion::toBase10(){
-    reverse(number.begin(), number.end());
+    string numbercpy = number;
+    reverse(numbercpy.begin(), numbercpy.end());
     unsigned base_10 = 0, cont  = 0;
     string aux;
-    for(int i = 0;this->number[i];i++){
-        aux = number[i];
+    for(int i = 0;numbercpy[i];i++){
+        aux = numbercpy[i];
         cont = getValue(aux);
         base_10+=cont*pow(entryBase,i);
     }
